@@ -17,6 +17,7 @@ const LINE_FEEDS = {
 export type BergenStTrainMinutes = {
   F: number[];
   G: number[];
+  timeRecorded: number;
 };
 
 function minutesUntil(arrivalEpochSeconds: number, nowMs: number): number {
@@ -86,6 +87,7 @@ export async function getNorthboundTrainMinutes(
   return {
     F: getNorthboundMinutesForLine(fFeed, "F", limit, nowMs),
     G: getNorthboundMinutesForLine(gFeed, "G", limit, nowMs),
+    timeRecorded: nowMs,
   };
 }
 
