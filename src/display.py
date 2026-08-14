@@ -12,7 +12,7 @@ device = sh1106(serial)
 _FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 _DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "trainTimes.json")
 
-FONT_SIZE = 16
+FONT_SIZE = 14
 LINE_HEIGHT = FONT_SIZE + 4
 DISPLAY_SECONDS = 5
 
