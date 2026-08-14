@@ -1,6 +1,8 @@
-# RUN FROM ROOT OF REPO
+#!/usr/bin/env bash
 
-source .venv/bin/activate
+#run from root of repo
+
+. ./.venv/bin/activate
 
 while true
 do 
