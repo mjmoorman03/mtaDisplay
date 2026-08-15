@@ -25,19 +25,23 @@ def format_updated(time_recorded_ms):
 
 
 def display():
-    with open(_DATA_PATH) as f:
-        data = json.load(f)
+    try:
+        with open(_DATA_PATH) as f:
+            data = json.load(f)
 
-    font = ImageFont.truetype(_FONT_PATH, FONT_SIZE)
+        font = ImageFont.truetype(_FONT_PATH, FONT_SIZE)
 
-    fLine = "F: " + ", ".join(str(t) for t in data["F"])
-    gLine = "G: " + ", ".join(str(t) for t in data["G"])
-    timeLine = format_updated(data["timeRecorded"])
+        fLine = "F: " + ", ".join(str(t) for t in data["F"])
+        gLine = "G: " + ", ".join(str(t) for t in data["G"])
+        timeLine = format_updated(data["timeRecorded"])
 
-    with canvas(device) as draw:
-        draw.text((0, 0), fLine, font=font, fill="white")
-        draw.text((0, LINE_HEIGHT), gLine, font=font, fill="white")
-        draw.text((0, LINE_HEIGHT * 2), timeLine, font=font, fill="white")
+        with canvas(device) as draw:
+            draw.text((0, 0), fLine, font=font, fill="white")
+            draw.text((0, LINE_HEIGHT), gLine, font=font, fill="white")
+            draw.text((0, LINE_HEIGHT * 2), timeLine, font=font, fill="white")
+    except Exception:
+        with canvas(device) as draw:
+            pass
 
     time.sleep(DISPLAY_SECONDS)
 
