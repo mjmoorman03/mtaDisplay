@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 
-# kills the $CHILD_PID process when run
+# Function to clean up background processes
 cleanup() {
-    kill "$CHILD_PID" 2>/dev/null
+    # Kill the specific child PID if it exists
+    if [ -n "$CHILD_PID" ]; then
+        kill "$CHILD_PID" 2>/dev/null
+    fi
+    
+    # Backup: Kill any remaining python3 processes started by this script's process group
+    pkill -P $$ -f "python3 src/display.py" 2>/dev/null
+    exit 0
 }
+
+# Trap signals and direct them to cleanup
 trap cleanup EXIT SIGINT SIGTERM
 
-# python child background process to continuously paint screen anew
-(
-    . ./.venv/bin/activate
-    python3 src/display.py
-    
-) &
+# Run python directly without an extra subshell wrapper
+# This ensures $! gets the exact PID of the python process instantly
+. ./.venv/bin/activate
+python3 src/display.py &
 CHILD_PID=$!
 
 # parent process, fetches continuously
