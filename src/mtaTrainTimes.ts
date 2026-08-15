@@ -100,8 +100,10 @@ async function writeData(data: BergenStTrainMinutes): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const data: BergenStTrainMinutes = await getNorthboundTrainMinutes();
-  writeData(data);
+  setInterval(async () => {
+    const data: BergenStTrainMinutes = await getNorthboundTrainMinutes();
+    writeData(data);
+  }, 20000);
 }
 
 main();

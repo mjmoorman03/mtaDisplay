@@ -22,8 +22,4 @@ python3 src/display.py &
 CHILD_PID=$!
 
 # parent process, fetches continuously
-while true
-do 
-    npx tsx src/mtaTrainTimes.ts
-    sleep 25
-done
+npx tsx src/mtaTrainTimes.ts
