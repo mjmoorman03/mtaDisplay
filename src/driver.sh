@@ -9,10 +9,8 @@ trap cleanup EXIT SIGINT SIGTERM
 # python child background process to continuously paint screen anew
 (
     . ./.venv/bin/activate
-    while true
-    do
-        python3 src/display.py
-    done
+    python3 src/display.py
+    
 ) &
 CHILD_PID=$!
 
@@ -20,5 +18,5 @@ CHILD_PID=$!
 while true
 do 
     npx tsx src/mtaTrainTimes.ts
-    sleep 30
+    sleep 25
 done
